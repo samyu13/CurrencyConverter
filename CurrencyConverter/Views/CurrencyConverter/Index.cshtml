@@ -1,0 +1,54 @@
+﻿@model CurrencyConverter.Models.CurrencyConversion
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+<h4>CurrencyConversion</h4>
+<hr />
+    <div class="row">
+        <a asp-controller="AuditLogs"
+           asp-action="Index">
+            Audit Logs
+        </a>
+    </div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Amount: </label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" type="text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Convert From: </label>
+                <label asp-for="ConvertFrom" class="form-control" />  
+                <span>@Model.ConvertFrom</span>
+            </div>
+            <div class="form-group">
+                <label>Convert To: </label>
+                <select asp-for="@Model.ConvertTo" class="form-control" asp-items="@Model.Countries()"></select>
+                <span asp-validation-for="ConvertTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConvertedAmount" class="control-label"></label>
+               <span>@Model.ConvertedAmount</span>             
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Convert" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

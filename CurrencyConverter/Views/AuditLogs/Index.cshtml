@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CurrencyConverter.Models.AuditEvent>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Audit Logs</title>
+</head>
+<body>
+    <div class="row">
+        <a href="/">
+           Back 
+        </a>
+    </div>
+    <div>
+        <form asp-action="Index" asp-controller="AuditLogs" method="post">
+          From date:  <input type="datetime-local" id="fromDate"
+                   name="fromDate"  >
+          To date: <input type="datetime-local" id="toDate"
+                   name="toDate" >
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+    @if (Model != null && Model.Any()) {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RequestedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.From)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.To)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ConversionRate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RequestedTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConversionRate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }  
+</body>
+</html>
